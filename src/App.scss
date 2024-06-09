@@ -1,19 +1,6 @@
-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #333;
-    color: white;
-    a{
-        color: white;
-        text-decoration: none;
-    }
-    ul{
-        display: flex;
-        list-style: none;
-        li{
-            margin-left: 1rem;
-        }
-    }
+main{
+    background-color: rgba(179, 190, 255, 0.4);
+    padding: 20px;
+    box-sizing: border-box;
 }
+

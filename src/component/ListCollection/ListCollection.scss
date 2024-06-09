@@ -1,0 +1,74 @@
+main{
+  .navbar{
+    display: flex;
+    gap: 20px;
+    height: 10%;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+
+    button {
+      width: 44px;
+      height: 44px;
+      padding: 7px;
+    }
+
+    input{
+      height: 44px;
+    }
+
+    &.del>button>div{
+      width: 100%;
+      height: 100%;
+      background-image: url("src/assets/delete-svgrepo-com.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      filter: invert(1);
+
+    }
+  }
+
+  .list{
+    //margin-top: 20px;
+    //padding-bottom: 60px;
+    overflow-y: scroll;
+    height: 80%;
+
+    li{
+      background-color: white;
+      height: 48px;
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+      justify-content: center;
+
+      .oc4xku4k.oc4xku4j{
+        display: flex;
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+
+
+  .new {
+    //position: absolute;
+    //bottom: 0;
+    //left: 0;
+    //right: 0;
+    padding-top: 20px;
+    box-sizing: border-box;
+    //background-color: rgb(224, 228, 254);
+    height: 10%;
+    button {
+      width: 100%;
+    }
+  }
+
+}
+
+body > div._1sg6ssb0._1sg6ssb3.oc4xkud7.oc4xkug7.oc4xkue7.oc4xkuf7.oc4xku32.oc4xku3f.oc4xku4j.oc4xku53.oc4xku125 > div{
+  margin: 0 10px;
+
+}

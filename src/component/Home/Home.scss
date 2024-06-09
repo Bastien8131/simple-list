@@ -1,0 +1,31 @@
+#tabs{
+  ._1sg6ssb0._1sg6ssb3.oc4xku39{
+    padding-top: 17px;
+    //display: flex;
+    //justify-content: center;
+    //flex-direction: column;
+    //align-items: stretch;
+
+    ._1sg6ssb0._1sg6ssb3._1a5r54w1{
+      width: 50%;
+
+      >div{
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+        transition: background-color 0.1s ease-in-out;
+
+        &[tabindex = "0"]{
+          background-color: rgba(203, 212, 225, 0.4);
+          padding: 6px 0;
+          bottom: -12px;
+        }
+      }
+
+    }
+
+    .oc4xku52{
+      justify-content: center;
+    }
+  }
+}
