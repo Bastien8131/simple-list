@@ -5,7 +5,7 @@ import {useState} from "react";
 import {IconDelete} from "../../icons/IconDelete.tsx";
 import {ListCollectionType as ListColl} from "../../type/ListCollectionType.tsx";
 
-export default function ListCollection() {
+export default function ListCollection({ onExecute }: { onExecute: () => void }) {
 
   const [deleteMode, setDeleteMode] = useState(false);
   const [search, setSearch] = useState("");
@@ -58,19 +58,20 @@ export default function ListCollection() {
   }
 
   const createList = () => {
-    const list = listCollection.concat({
-      id: firstId() + 1,
-      name: "Nouvelle Liste",
-      items: [
-        {
-          id: 0,
-          name: "Nouvel Item"
-        }
-      ],
-    });
-    setListCollection(list);
-    // console.log(list);
-    localStorage.setItem('listCollection', JSON.stringify(list));
+    onExecute();
+    // const list = listCollection.concat({
+    //   id: firstId() + 1,
+    //   name: "Nouvelle Liste",
+    //   items: [
+    //     {
+    //       id: 0,
+    //       name: "Nouvel Item"
+    //     }
+    //   ],
+    // });
+    // setListCollection(list);
+    // // console.log(list);
+    // localStorage.setItem('listCollection', JSON.stringify(list));
   };
 
   return (

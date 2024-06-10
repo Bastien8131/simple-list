@@ -13,6 +13,7 @@
     "@buildo/bento-design-system": "^0.22.16",
     "@reduxjs/toolkit": "^2.2.5",
     "@svgr/cli": "^8.1.0",
+    "framer-motion": "^11.2.10",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
