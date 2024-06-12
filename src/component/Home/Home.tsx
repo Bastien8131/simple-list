@@ -5,7 +5,6 @@ import { Tabs } from "@buildo/bento-design-system";
 import { useEffect, useState } from "react";
 import ListCollection from "../ListCollection/ListCollection.tsx";
 import Parametre from "../Parametre/Parametre.tsx";
-import { motion } from "framer-motion";
 
 const Home = () => {
 
@@ -16,7 +15,6 @@ const Home = () => {
   ]
 
   const [mainHeight, setMainHeight] = useState('100vh');
-  const [listVisible, setListVisible] = useState(false);
 
   useEffect(() => {
     const testHeight = document.getElementById('tabs')?.offsetHeight;
@@ -25,9 +23,7 @@ const Home = () => {
     }
   }, []);
 
-  const changeListVisibility = () => {
-    setListVisible(!listVisible)
-  }
+
 
   return (
     <>
@@ -35,30 +31,10 @@ const Home = () => {
         <Tabs size={"medium"} tabs={tabs} onChange={setTab} value={tab} />
       </span>
       <main style={{ height: mainHeight }}>
-        {tab === 'tab1' && <ListCollection onExecute={changeListVisibility} />}
+        {tab === 'tab1' && <ListCollection />}
         {tab === 'tab2' && <Parametre />}
       </main>
-      {listVisible && (
-        <motion.div className={'test'}
-          initial={{
-            y: 0,
-            width: '100vw',
-            height: '100vh'
-          }}
-          animate={{
-            y: -window.screen.height,
-            position: "absolute"
-          }}
-          exit={{ y: 0 }}
-          transition={{
-            duration: 0.3
-          }}
 
-        >
-          <p>Hello, Framer Motion!</p>
-          <button onClick={() => setListVisible(!listVisible)}>Toggle</button>
-        </motion.div>
-      )}
     </>
   );
 };

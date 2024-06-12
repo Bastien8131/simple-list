@@ -4,8 +4,10 @@ import {Body, Button, List, Modal, SearchBar} from "@buildo/bento-design-system"
 import {useState} from "react";
 import {IconDelete} from "../../icons/IconDelete.tsx";
 import {ListCollectionType as ListColl} from "../../type/ListCollectionType.tsx";
+import {motion} from "framer-motion";
+import AddList from "../AddList/AddList.tsx";
 
-export default function ListCollection({ onExecute }: { onExecute: () => void }) {
+export default function ListCollection() {
 
   const [deleteMode, setDeleteMode] = useState(false);
   const [search, setSearch] = useState("");
@@ -14,6 +16,11 @@ export default function ListCollection({ onExecute }: { onExecute: () => void })
   );
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [lastSelected, setLastSelected] = useState<number>(-1);
+  const [listVisible, setListVisible] = useState(false);
+
+  const changeListVisibility = () => {
+    setListVisible(!listVisible)
+  }
 
   const getList = () => {
     return sortingList().map((list) => ({
@@ -46,19 +53,19 @@ export default function ListCollection({ onExecute }: { onExecute: () => void })
     localStorage.setItem('listCollection', JSON.stringify(list));
   };
 
-  const firstId = () => {
-    const list = listCollection;
-    let id = 0;
-    list.forEach((list) => {
-      if (list.id > id) {
-        id = list.id;
-      }
-    });
-    return id;
-  }
+  // const firstId = () => {
+  //   const list = listCollection;
+  //   let id = 0;
+  //   list.forEach((list) => {
+  //     if (list.id > id) {
+  //       id = list.id;
+  //     }
+  //   });
+  //   return id;
+  // }
 
   const createList = () => {
-    onExecute();
+    setListVisible(!listVisible)
     // const list = listCollection.concat({
     //   id: firstId() + 1,
     //   name: "Nouvelle Liste",
@@ -124,6 +131,26 @@ export default function ListCollection({ onExecute }: { onExecute: () => void })
         >
           <Body size="medium">La suppresion de c'est liste sera définitive</Body>
         </Modal>
+      )}
+      {listVisible && (
+          <motion.div
+              initial={{
+                y: 0,
+                width: '100vw',
+                height: '100vh',
+                left: '0'
+              }}
+              animate={{
+                y: -window.screen.height + 20,
+                position: "absolute"
+              }}
+              exit={{ y: 0 }}
+              transition={{
+                duration: 0.3
+              }}
+          >
+            <AddList onExit={changeListVisibility} />
+          </motion.div>
       )}
     </>
   );

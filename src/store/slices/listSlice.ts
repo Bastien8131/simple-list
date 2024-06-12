@@ -1,8 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-
 const listSlice = createSlice({
-  id: 'list',
+  name: "list",
+  initialState: {
+    items: []
+  },
+  reducers: {
+  }
 });
 
-export default listSlice.reducer;
+export default listSlice;
