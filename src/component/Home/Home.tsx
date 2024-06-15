@@ -17,9 +17,9 @@ const Home = () => {
   const [mainHeight, setMainHeight] = useState('100vh');
 
   useEffect(() => {
-    const testHeight = document.getElementById('tabs')?.offsetHeight;
-    if (testHeight) {
-      setMainHeight(`calc(100vh - ${testHeight}px)`);
+    const height = document.getElementById('tabs')?.offsetHeight;
+    if (height) {
+      setMainHeight(`calc(100vh - ${height}px)`);
     }
   }, []);
 
