@@ -3,9 +3,10 @@ import "./ListCollection.scss";
 import {Body, Button, List, Modal, SearchBar} from "@buildo/bento-design-system";
 import {useState} from "react";
 import {IconDelete} from "../../icons/IconDelete.tsx";
-import {ListCollectionType as ListColl} from "../../type/ListCollectionType.tsx";
-import {motion} from "framer-motion";
-import AddList from "../AddList/AddList.tsx";
+import {ListCollectionType, ListCollectionType as ListColl} from "../../type/ListCollectionType.tsx";
+import OutsideFrame from "../OutsideFrame/OutsideFrame";
+// import ListView from "../ListView/ListView.tsx";
+import ListDnD from "../ListView/ListDnD.tsx";
 
 export default function ListCollection() {
 
@@ -16,10 +17,11 @@ export default function ListCollection() {
   );
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [lastSelected, setLastSelected] = useState<number>(-1);
-  const [listVisible, setListVisible] = useState(false);
+  const [showFrame, setShowFrame] = useState(false);
+  const [selectedList, setSelectedList] = useState({} as ListCollectionType)
 
-  const changeListVisibility = () => {
-    setListVisible(!listVisible)
+  const changeFrameVisibility = () => {
+    setShowFrame(!showFrame)
   }
 
   const getList = () => {
@@ -27,9 +29,12 @@ export default function ListCollection() {
       label: list.name + ' : ' + list.id,
       icon: deleteMode ? IconDelete : undefined,
       onPress: () => {
-        if(!deleteMode) return;
-        setLastSelected(list.id);
-        setConfirmDelete(true)
+        if(deleteMode) {
+          setLastSelected(list.id);
+          setConfirmDelete(true)
+        }else{
+          changeSelectedList(list.id)
+        }
       },
     }))
   }
@@ -50,36 +55,71 @@ export default function ListCollection() {
     const list = listCollection.filter((list) => list.id !== key);
     // console.log(list);
     setListCollection(list);
-    localStorage.setItem('listCollection', JSON.stringify(list));
+    updateLocalStorage('listCollection', list)
   };
 
-  // const firstId = () => {
-  //   const list = listCollection;
-  //   let id = 0;
-  //   list.forEach((list) => {
-  //     if (list.id > id) {
-  //       id = list.id;
-  //     }
-  //   });
-  //   return id;
-  // }
+  const avalableId = () => {
+    const list = listCollection;
+    let id = 0;
+    list.forEach((list) => {
+      if (list.id > id) {
+        id = list.id;
+      }
+    });
+    return id;
+  }
 
   const createList = () => {
-    setListVisible(!listVisible)
-    // const list = listCollection.concat({
-    //   id: firstId() + 1,
-    //   name: "Nouvelle Liste",
-    //   items: [
-    //     {
-    //       id: 0,
-    //       name: "Nouvel Item"
-    //     }
-    //   ],
-    // });
-    // setListCollection(list);
-    // // console.log(list);
-    // localStorage.setItem('listCollection', JSON.stringify(list));
+    const nl : ListColl = {
+      id: avalableId() + 1,
+      name: "Nouvelle Liste",
+      items: [
+        {
+          id: 0,
+          name: "obj1",
+          checked: false
+        },
+        {
+          id: 1,
+          name: "obj2",
+          checked: false
+        }
+      ],
+    };
+    setSelectedList(nl);
+    const list = listCollection.concat(nl);
+    setListCollection(list);
+    setShowFrame(!showFrame)
+    updateLocalStorage('listCollection', list)
   };
+
+  const updateLocalStorage = (key: string, list: ListColl[]) =>{
+    localStorage.setItem(key, JSON.stringify(list));
+  }
+
+  const onExitFrame = () => {
+    const list = selectedList
+    const listColl = listCollection
+
+    listColl.forEach((l, index) => {
+      if (l.id === list.id) {
+        listColl[index] = list
+      }
+    })
+
+    setListCollection(listColl)
+    updateLocalStorage('listCollection', listColl)
+
+    changeFrameVisibility()
+  }
+
+  const changeSelectedList = (id: number) => {
+    const list = listCollection.filter((l) => l.id === id)[0]
+    if(list) {
+      setSelectedList(list)
+      changeFrameVisibility()
+    }
+  }
 
   return (
     <>
@@ -132,26 +172,13 @@ export default function ListCollection() {
           <Body size="medium">La suppresion de c'est liste sera définitive</Body>
         </Modal>
       )}
-      {listVisible && (
-          <motion.div
-              initial={{
-                y: 0,
-                width: '100vw',
-                height: '100vh',
-                left: '0'
-              }}
-              animate={{
-                y: -window.screen.height + 20,
-                position: "absolute"
-              }}
-              exit={{ y: 0 }}
-              transition={{
-                duration: 0.3
-              }}
-          >
-            <AddList onExit={changeListVisibility} />
-          </motion.div>
-      )}
+
+      <OutsideFrame showFrame={showFrame}>
+        <ListDnD
+          onExit={onExitFrame}
+          list={selectedList}
+        />
+      </OutsideFrame>
     </>
   );
 }
