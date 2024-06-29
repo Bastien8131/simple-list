@@ -8,7 +8,7 @@ $bento-font-family: var(--bento-fontFamily-default);
 
 .tab, .items{
   //background: rgb(224, 228, 254);
-  background: rgb(254, 249, 224);
+  background: rgb(225, 229, 255);
 }
 
 .tab, .items, input{
@@ -39,12 +39,28 @@ input{
   input{
     text-align: center;
     margin: 16px 0;
+    padding: 0;
+    height: 27px;
   }
   p{
     height: 27px;
+    margin: 16px 0;
+    border-bottom: transparent 0.2px solid;
+    display: flex;
+    align-items: center;
   }
   button{
     margin: 0 20px;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: 0 transparent none;
+    &.exit{
+      background-image: url("src/assets/close-svgrepo-com.svg");
+    }
+    &.edit{
+      background-image: url("src/assets/pencil-svgrepo-com.svg");
+    }
   }
 }
 
@@ -53,19 +69,39 @@ input{
   box-sizing: border-box;
   ul{
     list-style-type: none;
+    padding: 0 20px;
     li{
       height: 26px;
       margin-bottom: 12px;
       .edit-check{
         display: flex;
+        justify-content: space-between;
         gap: 8px;
-        .grab{
+        .logo{
           width: 24px;
           height: 24px;
           text-align: center;
           vertical-align: center;
+          &.grab{
+            background-size: 75%;
+            background-image: url("src/assets/grab-vertical-svgrepo-com.svg");
+          }
+          &.del{
+            background-color: transparent;
+            border: 0 transparent none;
+            background-image: url("src/assets/delete-svgrepo-com.svg");
+          }
+        }
+        input{
+          padding: 0;
         }
       }
     }
   }
+}
+
+
+
+._1sg6ssb0._1sg6ssb3.oc4xku3f.oc4xkubr.oc4xku42.oc4xku41.oc4xku40.oc4xku3z.oc4xku52.oc4xku51.oc4xku50.oc4xku4z.oc4xku4i.oc4xku4h.oc4xku4g.oc4xku4f{
+  gap: 17.5px;
 }

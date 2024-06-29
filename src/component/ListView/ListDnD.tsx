@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./ListView.scss";
-import {DragDropContext, Droppable, Draggable, DropResult} from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
 import { ListCollectionType } from "../../type/ListCollectionType";
 import { CheckboxField } from "@buildo/bento-design-system";
 
 export default function ListDnD({ onExit, list }: { onExit: () => void, list: ListCollectionType }) {
   const [topHeight, setTopHeight] = useState('100vh');
   const [local, setLocal] = useState(list);
-  const [editMode, setEditMode] = useState(true);
+  const [editMode, setEditMode] = useState(false);
   const [newItem, setNewItem] = useState(false);
+  const [dragEnabled, setDragEnabled] = useState(false);
 
   const changeNameList = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -73,7 +74,18 @@ export default function ListDnD({ onExit, list }: { onExit: () => void, list: Li
     }
   };
 
+  function deleteItem2(e: React.MouseEvent<HTMLButtonElement>) {
+    const id = e.currentTarget.id;
+    const items = local.items.filter((i) => `item-${i.id}` !== id);
+    setLocal({
+      ...local,
+      items: items
+    });
+    list.items = items;
+  }
+
   const changeMode = () => {
+    setDragEnabled(!dragEnabled);
     setEditMode(!editMode);
   };
 
@@ -108,19 +120,20 @@ export default function ListDnD({ onExit, list }: { onExit: () => void, list: Li
       ...local,
       items: items
     });
+    list.items = items;
   };
 
   return (
     <>
       <div id={'top'}>
         <div className={"tab"}>
-          <button onClick={onExit}>X</button>
+          <button className={'logo exit'} onClick={onExit}></button>
           {editMode ? (
             <input type="text" value={local.name} onChange={changeNameList} />
           ) : (
             <p>{local.name}</p>
           )}
-          <button onClick={changeMode}>C</button>
+          <button className={'logo edit'} onClick={changeMode}></button>
         </div>
       </div>
       <div className={'items'} style={{ minHeight: topHeight }}>
@@ -129,35 +142,65 @@ export default function ListDnD({ onExit, list }: { onExit: () => void, list: Li
             {(provided) => (
               <ul {...provided.droppableProps} ref={provided.innerRef}>
                 {local.items.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                    {(provided) => (
-                      <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        {editMode ? (
-                          <div className={'edit-check'}>
-                            <div className={'grab'}>::</div>
-                            <input
-                              type="text"
-                              id={`item-${item.id}`}
-                              className={'input-edit'}
-                              value={item.name}
-                              onChange={changeNameOfItemList}
-                              onBlur={deleteItem}
+                  dragEnabled ? (
+                    <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
+                      {(provided) => (
+                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          {editMode ? (
+                            <div className={'edit-check'}>
+                              <div className={'logo grab'}></div>
+                              <input
+                                type="text"
+                                id={`item-${item.id}`}
+                                className={'input-edit'}
+                                value={item.name}
+                                onChange={changeNameOfItemList}
+                                onBlur={deleteItem}
+                              />
+                              <button className={'logo del'}
+                                id={`item-${item.id}`}
+                                value={item.name}
+                                onClick={deleteItem2}
+                              ></button>
+                            </div>
+                          ) : (
+                            <CheckboxField
+                              label={item.name}
+                              name={`${item.id}`}
+                              value={item.checked}
+                              onChange={() => { changeStatutOfItem(item.id); }}
                             />
-                          </div>
-                        ) : (
-                          <CheckboxField
-                            label={item.name}
-                            name={`${item.id}`}
-                            value={item.checked}
-                            onChange={() => { changeStatutOfItem(item.id); }}
-                          />
-                        )}
-                      </li>
-                    )}
-                  </Draggable>
+                          )}
+                        </li>
+                      )}
+                    </Draggable>
+                  ) : (
+                    <li key={item.id}>
+                      {editMode ? (<></>) : (
+                        <CheckboxField
+                          label={item.name}
+                          name={`${item.id}`}
+                          value={item.checked}
+                          onChange={() => { changeStatutOfItem(item.id); }}
+                        />
+                      )}
+                    </li>
+                  )
                 ))}
                 {provided.placeholder}
-                <li><button onClick={addItem}>Add</button></li>
+                {editMode && (
+                  <li>
+                    <div className={'edit-check'}>
+                      <div className={'logo grab'}></div>
+                      <input
+                        type="text"
+                        placeholder={'Add'}
+                        onClick={addItem}
+                      />
+                      <div className={'logo void'}></div>
+                    </div>
+                  </li>
+                )}
               </ul>
             )}
           </Droppable>
