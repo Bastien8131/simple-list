@@ -1,6 +1,11 @@
 main{
-    background-color: rgba(179, 190, 255, 0.4);
+    background-color: rgb(225, 229, 255);
     padding: 20px;
     box-sizing: border-box;
 }
 
+.logo{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}

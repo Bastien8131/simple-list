@@ -101,6 +101,8 @@ export default function ListCollection() {
     const list = selectedList
     const listColl = listCollection
 
+    list.items = list.items.filter((item) => {return item.name !== ''})
+
     listColl.forEach((l, index) => {
       if (l.id === list.id) {
         listColl[index] = list
@@ -131,7 +133,7 @@ export default function ListCollection() {
           onPress={() => changeDeleteMode()}
         />
         <SearchBar
-          placeholder="Search a value..."
+          placeholder="Rechercher une liste..."
           value={search}
           onChange={setSearch}
           aria-label="Search"
