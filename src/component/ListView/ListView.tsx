@@ -4,12 +4,12 @@ import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautif
 import { ListCollectionType } from "../../type/ListCollectionType";
 import { CheckboxField } from "@buildo/bento-design-system";
 
-export default function ListDnD({ onExit, list }: { onExit: () => void, list: ListCollectionType }) {
+export default function ListView({ onExit, list }: { onExit: () => void, list: ListCollectionType }) {
   const [topHeight, setTopHeight] = useState('100vh');
   const [local, setLocal] = useState(list);
-  const [editMode, setEditMode] = useState(false);
   const [newItem, setNewItem] = useState(false);
-  const [dragEnabled, setDragEnabled] = useState(false);
+  const [editMode, setEditMode] = useState(true);
+  const [dragEnabled, setDragEnabled] = useState(true);
 
   const changeNameList = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -48,19 +48,19 @@ export default function ListDnD({ onExit, list }: { onExit: () => void, list: Li
     list.items = local.items;
   };
 
-  const addItem = () => {
-    const items = local.items;
-    items.push({
-      id: items.length,
-      name: '',
-      checked: false
-    });
-    setNewItem(true);
-    setLocal({
-      ...local,
-      items: items
-    });
-  };
+  // const addItem = () => {
+  //   const items = local.items;
+  //   items.push({
+  //     id: items.length,
+  //     name: '',
+  //     checked: false
+  //   });
+  //   setNewItem(true);
+  //   setLocal({
+  //     ...local,
+  //     items: items
+  //   });
+  // };
 
   const deleteItem = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id;
@@ -195,7 +195,8 @@ export default function ListDnD({ onExit, list }: { onExit: () => void, list: Li
                       <input
                         type="text"
                         placeholder={'Add'}
-                        onClick={addItem}
+                        // onClick={addItem}
+                        onClick={onExit}
                       />
                       <div className={'logo void'}></div>
                     </div>

@@ -6,7 +6,7 @@ import {IconDelete} from "../../icons/IconDelete.tsx";
 import {ListCollectionType, ListCollectionType as ListColl} from "../../type/ListCollectionType.tsx";
 import OutsideFrame from "../OutsideFrame/OutsideFrame";
 // import ListView from "../ListView/ListView.tsx";
-import ListDnD from "../ListView/ListDnD.tsx";
+import ListView from "../ListView/ListView.tsx";
 
 export default function ListCollection() {
 
@@ -176,7 +176,7 @@ export default function ListCollection() {
       )}
 
       <OutsideFrame showFrame={showFrame}>
-        <ListDnD
+        <ListView
           onExit={onExitFrame}
           list={selectedList}
         />
