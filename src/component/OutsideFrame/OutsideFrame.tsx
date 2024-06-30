@@ -4,6 +4,8 @@ import {motion} from "framer-motion";
 
 export default function OutsideFrame({children, showFrame}: { children: React.ReactNode, showFrame?: boolean }){
 
+  // const body = document.querySelector('body');
+  // const height = body?.getBoundingClientRect().height || 0;
 
   return (
     <>
@@ -11,16 +13,16 @@ export default function OutsideFrame({children, showFrame}: { children: React.Re
         <motion.div
           initial={{
             y: 0,
-            width: '100vw',
-            height: '100vh',
-            minHeight: '100vh',
+            width: `${window.innerWidth}px`,
+            height: `${window.innerHeight}px`,
+            minHeight: `${window.innerHeight}px`,
             left: '0',
           }}
           animate={{
-            y: -window.screen.height + 20,
+            y: - window.innerHeight + 20,
             position: "absolute"
           }}
-          exit={{ y: 0 }}
+          exit={{y: 0}}
           transition={{
             duration: 0.3
           }}

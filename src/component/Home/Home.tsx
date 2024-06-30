@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     const height = document.getElementById('tabs')?.offsetHeight;
     if (height) {
-      setMainHeight(`calc(100vh - ${height}px)`);
+      setMainHeight(`calc(${window.innerHeight}px - ${height}px)`);
     }
   }, []);
 
@@ -28,11 +28,12 @@ const Home = () => {
   return (
     <>
       <span id={'tabs'}>
-        <Tabs size={"medium"} tabs={tabs} onChange={setTab} value={tab} />
+        <Tabs size={"medium"} tabs={tabs} onChange={setTab} value={tab}/>
       </span>
-      <main style={{ height: mainHeight }}>
-        {tab === 'tab1' && <ListCollection />}
-        {tab === 'tab2' && <Parametre />}
+      <main style={{height: mainHeight}}>
+      {/*<main style={{ height: '100vh' }}>*/}
+        {tab === 'tab1' && <ListCollection/>}
+        {tab === 'tab2' && <Parametre/>}
       </main>
 
     </>

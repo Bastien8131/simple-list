@@ -8,8 +8,8 @@ export default function ListView({ onExit, list }: { onExit: () => void, list: L
   const [topHeight, setTopHeight] = useState('100vh');
   const [local, setLocal] = useState(list);
   const [newItem, setNewItem] = useState(false);
-  const [editMode, setEditMode] = useState(true);
-  const [dragEnabled, setDragEnabled] = useState(true);
+  const [editMode, setEditMode] = useState(false);
+  const [dragEnabled, setDragEnabled] = useState(false);
 
   const changeNameList = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -48,19 +48,19 @@ export default function ListView({ onExit, list }: { onExit: () => void, list: L
     list.items = local.items;
   };
 
-  // const addItem = () => {
-  //   const items = local.items;
-  //   items.push({
-  //     id: items.length,
-  //     name: '',
-  //     checked: false
-  //   });
-  //   setNewItem(true);
-  //   setLocal({
-  //     ...local,
-  //     items: items
-  //   });
-  // };
+  const addItem = () => {
+    const items = local.items;
+    items.push({
+      id: items.length,
+      name: '',
+      checked: false
+    });
+    setNewItem(true);
+    setLocal({
+      ...local,
+      items: items
+    });
+  };
 
   const deleteItem = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id;
@@ -136,7 +136,7 @@ export default function ListView({ onExit, list }: { onExit: () => void, list: L
           <button className={'logo edit'} onClick={changeMode}></button>
         </div>
       </div>
-      <div className={'items'} style={{ minHeight: topHeight }}>
+      <div className={'items'} style={{ maxHeight: topHeight }}>
         <DragDropContext onDragEnd={(result: DropResult) => onDragEnd(result)}>
           <Droppable droppableId="droppable">
             {(provided) => (
@@ -195,8 +195,7 @@ export default function ListView({ onExit, list }: { onExit: () => void, list: L
                       <input
                         type="text"
                         placeholder={'Add'}
-                        // onClick={addItem}
-                        onClick={onExit}
+                        onClick={addItem}
                       />
                       <div className={'logo void'}></div>
                     </div>
