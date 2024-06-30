@@ -15,6 +15,9 @@ main{
 
     input{
       height: 44px;
+      &.oc4xku1de{
+        box-shadow: none;
+      }
     }
 
     &.del>button>div{
@@ -26,6 +29,10 @@ main{
       background-size: 100%;
       filter: invert(1);
 
+    }
+
+    ._1sg6ssb0._1sg6ssb3.oc4xku1ba{
+      width: calc(100% - 44px);
     }
   }
 
@@ -72,3 +79,4 @@ body > div._1sg6ssb0._1sg6ssb3.oc4xkud7.oc4xkug7.oc4xkue7.oc4xkuf7.oc4xku32.oc4x
   margin: 0 10px;
 
 }
+

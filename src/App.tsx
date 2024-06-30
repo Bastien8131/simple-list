@@ -8,6 +8,10 @@ import Home from "./component/Home/Home.tsx";
 
 
 const App = () => {
+
+  const body = document.querySelector('body') as HTMLBodyElement;
+  body.style.height = `${window.innerHeight}px`;
+
   return (
     <BentoProvider defaultMessages={defaultMessages}>
       <Routes>

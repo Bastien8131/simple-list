@@ -26,7 +26,7 @@ export default function ListCollection() {
 
   const getList = () => {
     return sortingList().map((list) => ({
-      label: list.name + ' : ' + list.id,
+      label: list.name,
       icon: deleteMode ? IconDelete : undefined,
       onPress: () => {
         if(deleteMode) {

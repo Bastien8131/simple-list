@@ -7,8 +7,8 @@ $bento-font-family: var(--bento-fontFamily-default);
 
 
 .tab, .items{
-  background: rgb(22, 34, 155);
-  //background: rgb(225, 229, 255);
+  //background: rgba(22, 34, 155, 0.37);
+  background: rgb(225, 229, 255);
 }
 
 .tab, .items, input{
@@ -67,6 +67,7 @@ input{
 .items{
   padding: 20px;
   box-sizing: border-box;
+  overflow-y: scroll;
   ul{
     list-style-type: none;
     padding: 0 20px;
