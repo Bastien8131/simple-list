@@ -22,7 +22,13 @@ $bento-font-family: var(--bento-fontFamily-default);
 input{
   background-color: rgba(254,205,82,0);
   border: 0;
-  border-bottom: gray 0.2px solid;
+  border-bottom: rgba(128, 128, 128, 0) 0.2px solid;
+  //border-bottom: rgba(128, 128, 128, 0.44) 0.2px solid;
+  &:focus{
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 100px;
+    position: relative;
+  }
 }
 
 #top{
@@ -83,18 +89,23 @@ input{
           height: 24px;
           text-align: center;
           vertical-align: center;
+          background-color: transparent;
+          border: 0 transparent none;
           &.grab{
             background-size: 75%;
+            //rotate: 90deg;
             background-image: url("src/assets/grab-vertical-svgrepo-com.svg");
           }
           &.del{
-            background-color: transparent;
-            border: 0 transparent none;
             background-image: url("src/assets/delete-svgrepo-com.svg");
           }
         }
         input{
           padding: 0;
+          &:focus{
+            padding-left: 10px;
+            left: -5px;
+          }
         }
       }
     }
@@ -105,4 +116,10 @@ input{
 
 ._1sg6ssb0._1sg6ssb3.oc4xku3f.oc4xkubr.oc4xku42.oc4xku41.oc4xku40.oc4xku3z.oc4xku52.oc4xku51.oc4xku50.oc4xku4z.oc4xku4i.oc4xku4h.oc4xku4g.oc4xku4f{
   gap: 17.5px;
+}
+
+._1sg6ssb0._1sg6ssb3.oc4xku7f{
+  .alert{
+    color: #e42131;
+  }
 }

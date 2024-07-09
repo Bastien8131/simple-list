@@ -73,18 +73,7 @@ export default function ListCollection() {
     const nl : ListColl = {
       id: avalableId() + 1,
       name: "Nouvelle Liste",
-      items: [
-        {
-          id: 0,
-          name: "obj1",
-          checked: false
-        },
-        {
-          id: 1,
-          name: "obj2",
-          checked: false
-        }
-      ],
+      items: [],
     };
     setSelectedList(nl);
     const list = listCollection.concat(nl);

@@ -6,3 +6,7 @@ body{
 #root{
     /*height: 100vh;*/
 }
+
+*:focus{
+    outline: rgba(0, 0, 0, 0);
+}
