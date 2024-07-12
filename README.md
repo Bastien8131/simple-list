@@ -26,7 +26,7 @@ Simple List Application is a React-based project using Vite and TypeScript, desi
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/your-username/simple-list-app.git
+    git clone https://github.com/Bastien8131/simple-list-app.git
     cd simple-list-app
     ```
 
