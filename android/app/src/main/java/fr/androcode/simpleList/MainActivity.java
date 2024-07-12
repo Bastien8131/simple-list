@@ -1,4 +1,4 @@
-package com.example.app;
+package fr.androcode.simpleList;
 
 import com.getcapacitor.BridgeActivity;
 

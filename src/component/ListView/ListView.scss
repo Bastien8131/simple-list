@@ -62,10 +62,10 @@ input{
     background-color: transparent;
     border: 0 transparent none;
     &.exit{
-      background-image: url("src/assets/close-svgrepo-com.svg");
+      background-image: url("../../../public/close-svgrepo-com.svg");
     }
     &.edit{
-      background-image: url("src/assets/pencil-svgrepo-com.svg");
+      background-image: url("../../../public/pencil-svgrepo-com.svg");
     }
   }
 }
@@ -94,10 +94,10 @@ input{
           &.grab{
             background-size: 75%;
             //rotate: 90deg;
-            background-image: url("src/assets/grab-vertical-svgrepo-com.svg");
+            background-image: url("../../../public/grab-vertical-svgrepo-com.svg");
           }
           &.del{
-            background-image: url("src/assets/delete-svgrepo-com.svg");
+            background-image: url("../../../public/delete-svgrepo-com.svg");
           }
         }
         input{

@@ -203,10 +203,10 @@ export default function ListView({ onExit, list }: { onExit: () => void, list: L
                               <Menu
                                 size="medium"
                                 items={[
-                                  {
-                                    label: 'Ajouter une image',
-                                    onPress: () => console.log(''),
-                                  },
+                                  // {
+                                  //   label: 'Ajouter une image',
+                                  //   onPress: () => console.log(''),
+                                  // },
                                   {
                                     label: <span className={'alert'}>Supprimer</span>,
                                     // label: "Supprimer",

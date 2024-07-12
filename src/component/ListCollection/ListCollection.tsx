@@ -128,7 +128,7 @@ export default function ListCollection() {
           aria-label="Search"
         />
       </div>
-      <div className={'list'}>
+      <div className={`list ${listCollection.length > 0 ? "" : "no-items"}`}>
         <List
           size="large"
           dividers

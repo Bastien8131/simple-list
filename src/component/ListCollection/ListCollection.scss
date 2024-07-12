@@ -23,7 +23,7 @@ main{
     &.del>button>div{
       width: 100%;
       height: 100%;
-      background-image: url("src/assets/delete-svgrepo-com.svg");
+      background-image: url("../../../public/delete-svgrepo-com.svg");
       background-position: center;
       background-repeat: no-repeat;
       background-size: 100%;
@@ -41,6 +41,13 @@ main{
     //padding-bottom: 60px;
     overflow-y: scroll;
     height: 80%;
+
+    &.no-items{
+      background-image: url("../../../public/dino.svg");
+      background-size: 25%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
     li{
       background-color: white;
